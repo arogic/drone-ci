@@ -1,0 +1,26 @@
+kind: pipeline
+type: docker
+name: default
+
+steps:
+- name: aws
+  image: alpine
+  # image: mesosphere/aws-cli
+  # environment:
+  #   AWS_DEFAULT_REGION: eu-west-1
+  #   AWS_ACCESS_KEY_ID:
+  #     from_secret: aws_access_key
+  #   AWS_SECRET_ACCESS_KEY:
+  #     from_secret: aws_secret_access_key
+  commands:
+    - echo "Hello World"
+    - ./run.sh
+  # - aws --version
+  # - aws s3 ls
+  # - echo "Build Number ${DRONE_BUILD_NUMBER}"
+  when:
+    event:
+    - push
+  when:
+    branch:
+    - master
